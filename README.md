@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meetune Club — Trouve les musiciens qui te ressemblent
 
-## Getting Started
+> Nom retenu pour l'instant ; à revérifier (domaine, marque) avant un éventuel lancement réel.
 
-First, run the development server:
+Meetune Club est une plateforme de mise en relation entre musiciens et groupes. Elle permet de trouver des partenaires musicaux selon l'instrument, le style, la ville et le niveau.
+
+🎥 **Vidéo de démonstration** : _lien YouTube non répertorié à ajouter_
+🌐 **Site en ligne** : _lien Vercel à ajouter_
+
+---
+
+## Le problème
+
+Les musiciens, surtout les débutants, ont du mal à trouver d'autres musiciens près de chez eux : les groupes Facebook sont désorganisés et les sites existants sont peu pratiques (annonces textuelles, pas de vrais profils, interface datée).
+
+## La solution
+
+Une plateforme moderne avec des profils musiciens riches, une recherche par filtres et une mise en relation simple.
+
+## Fonctionnalités
+
+- [ ] Inscription et connexion
+- [ ] Création et édition de son profil (instruments, genres, ville, niveau, bio)
+- [ ] Exploration des profils sous forme de cartes
+- [ ] Recherche avec filtres (instrument, genre, ville, niveau)
+- [ ] Prise de contact entre musiciens
+- [ ] Interface responsive (mobile et ordinateur)
+
+## Stack technique
+
+| Technologie | Rôle |
+|---|---|
+| Next.js | Framework (App Router) |
+| Tailwind CSS | Mise en forme |
+| _À compléter_ | Base de données |
+| _À compléter_ | Authentification |
+
+## Installation et lancement
 
 ```bash
+git clone <url-du-repo>
+cd meetune-club
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est ensuite accessible sur http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture et choix techniques
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+_À compléter au fil du développement : pourquoi chaque technologie, organisation des dossiers, gestion des données._
 
-## Learn More
+## Modèle de données
 
-To learn more about Next.js, take a look at the following resources:
+_À compléter._
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Améliorations futures
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Carte interactive des musiciens autour de soi
+- Extrait audio sur le profil
+- Messagerie intégrée
+- Notifications par e-mail
 
-## Deploy on Vercel
+## Mon activité
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> Cette section est une simulation : elle décrit l'activité que je compte lancer à l'issue de ma formation. Les chiffres sont des hypothèses de travail.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Statut envisagé
+
+_À compléter : micro-entreprise, et pourquoi._
+
+### Tarif journalier (simulation)
+
+_À compléter avec les résultats de l'outil [Combien facturer](https://believemy.com/fr/outils/combien-facturer) : objectif net, chiffre d'affaires annuel, cotisations, tarif par jour, reste après cotisations._
+
+### Prix du produit
+
+_À compléter : offre gratuite, offre Premium, offre pro._
+
+### Premiers clients visés
+
+_À compléter : cibles et canaux pour les trouver._
