@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
-import MusicianCard from "@/components/musicians/MusicianCard";
-import { musicians } from "@/lib/mock-data";
+import { Suspense } from "react";
+import MusicianResults from "@/components/musicians/MusicianResults";
 
 export const metadata: Metadata = {
   title: "Explorer les musiciens · Meetune Club",
 };
 
-export default function MusiciansPage() {
+// La page n'attend pas searchParams elle-même : le titre ne dépend pas de l'URL,
+// Next peut donc le préparer à l'avance. Seuls les résultats, qui dépendent des
+// filtres de l'URL, sont calculés à chaque visite, à l'intérieur du Suspense.
+export default function MusiciansPage({ searchParams }: PageProps<"/musiciens">) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-bold sm:text-4xl">Explorer les musiciens</h1>
-      <p className="mt-2 text-muted">{musicians.length} musiciens inscrits</p>
 
-      {/* Mobile d'abord : 1 colonne par défaut, 2 dès la tablette (md), 3 sur ordinateur (lg). */}
-      <ul className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {musicians.map((musician) => (
-          <li key={musician.id}>
-            <MusicianCard musician={musician} />
-          </li>
-        ))}
-      </ul>
+      <Suspense
+        fallback={
+          <p role="status" className="mt-2 text-muted">
+            Chargement des musiciens…
+          </p>
+        }
+      >
+        <MusicianResults searchParams={searchParams} />
+      </Suspense>
     </section>
   );
 }
