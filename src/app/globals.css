@@ -27,6 +27,12 @@
 }
 
 @layer base {
+  /* Indique au navigateur que le site est sombre : les éléments natifs
+     (menus déroulants, barres de défilement) s'affichent alors en sombre. */
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     @apply bg-background font-sans text-foreground;
   }

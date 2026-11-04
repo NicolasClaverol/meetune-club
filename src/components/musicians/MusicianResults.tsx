@@ -8,17 +8,10 @@ import {
   type Goal,
   type Level,
 } from "@/lib/mock-data";
-
-type SearchParams = { [key: string]: string | string[] | undefined };
+import { first, type SearchParams } from "@/lib/search-params";
 
 interface MusicianResultsProps {
   searchParams: Promise<SearchParams>;
-}
-
-// Un paramètre répété (?genre=Rock&genre=Jazz) arrive sous forme de tableau :
-// on garde seulement la première valeur.
-function first(value: string | string[] | undefined): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
 }
 
 // Une URL peut être modifiée à la main : on vérifie que la valeur fait bien
@@ -47,7 +40,7 @@ export default async function MusicianResults({ searchParams }: MusicianResultsP
 
   if (results.length === 0) {
     return (
-      <div className="mt-8 rounded-2xl border border-white/10 bg-surface px-6 py-12 text-center">
+      <div className="rounded-2xl border border-white/10 bg-surface px-6 py-12 text-center">
         <h2 className="text-xl font-bold">Aucun musicien trouvé</h2>
         <p className="mt-2 text-muted">
           Aucun profil ne correspond à tous ces critères. Essayez d&apos;en retirer un.
@@ -65,12 +58,13 @@ export default async function MusicianResults({ searchParams }: MusicianResultsP
   return (
     <>
       {/* role="status" : un lecteur d'écran annonce le nouveau nombre quand les filtres changent. */}
-      <p role="status" className="mt-2 text-muted">
+      <p role="status" className="text-muted">
         {results.length} {results.length === 1 ? "musicien trouvé" : "musiciens trouvés"}
       </p>
 
-      {/* Mobile d'abord : 1 colonne par défaut, 2 dès la tablette (md), 3 sur ordinateur (lg). */}
-      <ul className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* Mobile d'abord : 1 colonne, 2 dès la tablette (md), 3 sur grand écran (xl),
+          car sur ordinateur le panneau de filtres occupe déjà la colonne de gauche. */}
+      <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {results.map((musician) => (
           <li key={musician.id}>
             <MusicianCard musician={musician} />
