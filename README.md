@@ -5,7 +5,7 @@
 Meetune Club est une plateforme de mise en relation entre musiciens et groupes. Elle permet de trouver des partenaires musicaux selon l'instrument, le style, la ville et le niveau.
 
 🎥 **Vidéo de démonstration** : _lien YouTube non répertorié à ajouter_
-🌐 **Site en ligne** : _lien Vercel à ajouter_
+🌐 **Site en ligne** : https://meetune-club.vercel.app
 
 ---
 
