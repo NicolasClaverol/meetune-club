@@ -9,6 +9,8 @@ export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
+    // Commande lancée par `npx prisma db seed` (tsx exécute le TypeScript).
+    seed: "tsx prisma/seed.ts",
   },
   datasource: {
     // Connexion directe (non poolée) : les migrations modifient la structure
