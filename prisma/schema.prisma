@@ -1,0 +1,89 @@
+// Schéma Prisma : description des tables de la base de données.
+// L'URL de connexion n'est pas ici mais dans prisma.config.ts (Prisma 7).
+// Modèle de données décrit dans docs/ARCHITECTURE.md (section 3).
+
+// Génère le client TypeScript utilisé par le site (dossier ignoré par Git,
+// recréé par `npx prisma generate`).
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Compte de connexion (identifiants). Séparé du profil public.
+model User {
+  id        String           @id @default(cuid())
+  email     String           @unique
+  password  String // hash bcrypt, jamais le mot de passe en clair
+  createdAt DateTime         @default(now())
+  profile   Profile? // un compte a au plus un profil (rempli à l'onboarding)
+  sent      ContactRequest[] @relation("sent") // demandes envoyées
+  received  ContactRequest[] @relation("received") // demandes reçues
+}
+
+// Profil public du musicien, affiché sur les cartes et la page de profil.
+model Profile {
+  id          String       @id @default(cuid())
+  userId      String       @unique // @unique : un seul profil par compte (relation 1-1)
+  user        User         @relation(fields: [userId], references: [id])
+  name        String
+  city        String
+  level       Level
+  bio         String
+  youtubeUrl  String?
+  hue         Int          @default(200) // teinte de l'avatar à initiales (0 à 360)
+  // Relations plusieurs-à-plusieurs : Prisma crée lui-même les tables de liaison.
+  instruments Instrument[]
+  genres      Genre[]
+  goals       Goal[]
+}
+
+// Listes de référence (Guitare, Rock, Jam…), utilisées par les filtres.
+model Instrument {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  profiles Profile[]
+}
+
+model Genre {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  profiles Profile[]
+}
+
+model Goal {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  profiles Profile[]
+}
+
+// Demande de contact d'un musicien (from) vers un autre (to).
+model ContactRequest {
+  id        String        @id @default(cuid())
+  fromId    String
+  toId      String
+  from      User          @relation("sent", fields: [fromId], references: [id])
+  to        User          @relation("received", fields: [toId], references: [id])
+  message   String
+  status    RequestStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+
+  // La base refuse une deuxième demande du même expéditeur au même destinataire.
+  @@unique([fromId, toId])
+}
+
+enum Level {
+  DEBUTANT
+  INTERMEDIAIRE
+  CONFIRME
+  PRO
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
